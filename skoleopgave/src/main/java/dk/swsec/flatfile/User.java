@@ -11,6 +11,13 @@ public class User {
 
     public User(int newId, String first_name, String last_name, String address, 
         String street_number, String password) {
+            this.person_id = newId;
+            this.first_name = first_name;
+            this.last_name = last_name;
+            this.address = address;
+            this.street_number = street_number;
+            this.password = password;
+            enabled = true;
         
     }
     public int getPerson_id() {

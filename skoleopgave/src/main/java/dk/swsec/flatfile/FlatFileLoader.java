@@ -1,7 +1,15 @@
 package dk.swsec.flatfile;
 
+import java.io.File;
+import java.util.HashMap;
+
 public class FlatFileLoader {
-    public FlatFileLoader() {
-        final String filename = "flat-file-loader.json";
+    public HashMap<Integer, User> loadMemory(File memoryFile) {
+        HashMap<Integer, User> hmretval = new HashMap<>();
+
+        
+        
+        return hmretval;
     }
+    
 }
