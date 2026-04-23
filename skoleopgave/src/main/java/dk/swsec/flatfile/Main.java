@@ -9,7 +9,7 @@ import io.javalin.Javalin;
 
 public class Main {
     public static void main(String[] args) {
-        HashMap memory = new HashMap<Integer,User>();
+        HashMap<Integer,User> memory = new HashMap<Integer,User>();
         Path filePath = Path.of("file", "flatfile.json");
         File flatFile = filePath.toFile();
         if (!flatFile.exists()) {
@@ -24,13 +24,36 @@ public class Main {
 
 
         var app = Javalin.create(config -> {
-            config.useVirtualThreads = true;
+            config.routes.get("/user", ctx -> {
+            });
+            config.routes.get("/user/{userid}", ctx -> {
+                try {
+                    ctx.status(200);
+                    ctx.json(memory.get(Integer.parseInt(ctx.pathParam("userid"))));
+                } catch (NumberFormatException numex) {
+                    ctx.status(400);
+                    ctx.result("Numbers only.");
+                }
+            });
+            config.routes.post("/user/", ctx -> {
+                
+            });
+            config.routes.patch("/user/{userid}", ctx -> {
+                try {
+                    int userid = Integer.parseInt(ctx.pathParam("userid"));
+                } catch (NumberFormatException numex) {
+                    ctx.status(400);
+                    ctx.result("Numbers only.");
+                }
+            });
+            config.routes.delete("/user/{userid}", ctx -> {
+                try {
+                    int userid = Integer.parseInt(ctx.pathParam("userid"));
+                } catch (NumberFormatException numex) {
+                    ctx.status(400);
+                    ctx.result("Numbers only.");
+                }
+            });
         }).start(7070);
-
-        app.get("/getusers/{user}", ctx -> {});
-        app.get("/getusers", ctx -> {});
-        app.post("/adduser", ctx -> {});
-        app.patch("/edituser", ctx -> {});
-        app.delete("/removeuser", ctx -> {});
     }
 }
